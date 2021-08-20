@@ -1,0 +1,24 @@
+int czujnik = A1;   //pin analogowy A1 połączony z nóżką fotorezystora
+int led = 7;
+void setup() {
+  Serial.begin(9600);        //inicjalizacja monitora szeregowego
+  Serial.println("----  Test fotorezystora  ----");
+  pinMode(7, OUTPUT);
+  //pin 13 ustawiony jako wyjście - dioda
+}
+
+void loop() {
+  int war = analogRead(czujnik);      //odczytanie wartości z A1
+  Serial.print(war);                  //wyświetlenie jej na monitorze
+  if (war<700)                      //gdy wartość przekroczy pewien ustalony próg, wtedy dioda na pinie 13 zaświeci się
+  {
+    Serial.print("   Dioda zapalona");  
+    digitalWrite(7, HIGH);
+  }
+  else
+  {
+    digitalWrite(7, LOW);
+  }
+  Serial.println("");
+  delay(200);                         //opóźn ienie między kolejnymi odczytami
+}
